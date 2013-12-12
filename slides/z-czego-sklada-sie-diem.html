@@ -1,0 +1,193 @@
+<section data-background="#ED9308">
+    <section id="z-czego-sklada-sie-diem">
+        <h2>Z czego składa się Diem</h2>
+
+        <h3>czyli sprintem przez dokumentację</h3>
+
+        <p>Dla maratończyków:<br><a href="http://diem-project.org/diem-5-1/doc/en/reference-book">http://diem-project.org/ &rarr;
+            Documentation &rarr; Reference Book</a></p>
+    </section>
+
+    <section data-background="#ABB308" id="z-czego-sklada-sie-diem-layout">
+        <h2>Layout</h2>
+        <p>Czyli układ treści</p>
+        <img src="img/layout.png" alt="" style="float:left;"/>
+        <ul>
+            <li>Strefy (zone)</li>
+            <li>Obszary (area)</li>
+            <li>Widgety</li>
+        </ul>
+    </section>
+
+    <section data-background="#868D00" id="z-czego-sklada-sie-diem-widgety">
+        <h2>Widgety</h2>
+
+        <ul>
+            <li class="fragment">bardziej przyjazne komponenty</li>
+            <li class="fragment">konfigurowalne z poziomu GUI</li>
+            <li class="fragment">osadzane na stronie za pomocą drag&drop</li>
+            <li class="fragment">tworzone automatycznie dla komponentów modułów (<em>config/dm/modules.yml</em>)</li>
+            <li class="fragment">lub ręcznie za pomocą klas (<em>apps/front/config/dm/widget_types.yml</em> albo <em>plugins/pluginName/config/dm/widget_types.yml</em>)</li>
+            <li class="fragment">umożliwiają tworzenie strony bez konieczności pisania linijki kodu</li>
+        </ul>
+    </section>
+
+    <section data-background="#868D00" id="z-czego-sklada-sie-diem-widgety-przykłady">
+        <h2>Widgety - przykłady</h2>
+
+        <ul>
+            <li class="fragment">tytuł</li>
+            <li class="fragment">obrazek</li>
+            <li class="fragment">link</li>
+            <li class="fragment">tekst (najbardziej uniwersalny i najczęściej używany)</li>
+            <li class="fragment">menu</li>
+            <li class="fragment">okruchy (breadcrumbs)</li>
+            <li class="fragment">formularz wyszukiwania</li>
+            <li class="fragment">wyniki wyszukiwania</li>
+        </ul>
+    </section>
+
+    <section data-background="#868D00" id="z-czego-sklada-sie-diem-widgety-gui">
+        <h2>Widgety - GUI</h2>
+
+
+        <img src="img/widgety.png" alt="" style="float:left;width:45%;"/>
+        <img src="img/widgety2.png" alt="" style="float:left;width:45%; margin-left:5%" />
+    </section>
+
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly">
+        <h3>Moduły</h3>
+
+        <p class="fragment">Moduł to wyizolowana część aplikacji</p>
+
+        <p class="fragment">zazwyczaj zajmuje się obsługą jakiegoś modelu nanych</p>
+
+        <p class="fragment">jest logicznie związany z <em>modelem danych</em> (<em>schema.yml</em>)
+        </p>
+
+        <p class="fragment">odpowiada mu jeden folder (np moduł w aplikacji admin):
+            <code>
+                <pre class="fragment">
+                    moduleName
+                    └── actions
+                        ├── actions.class.php
+                        └── components.class.php
+                    └── config
+                        └── generator.yml
+                    └── lib
+                        └── someClassName.php
+                    └── templates
+                        └── _partial_name.php
+                </pre>
+            </code>
+            <span class="fragment">w katalogu app/(front|admin)/modules</span>
+        </p>
+    </section>
+
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly-plik-modules-yml">
+        <h3>Moduły - plik modules.yml</h3>
+
+        <p class="fragment">konfigurację modułu definiuje klucz w pliku <em>config/dm/modules.yml</em></p>
+
+        <p class="fragment">plik jest podzielony na grupy i podgrupy</p>
+
+        <p class="fragment">
+            <code>
+                <pre class="fragment">
+Content:                # grupa - pierwszy poziom menu w admin
+  Foto:                 # podgrupa - drugi poziom menu w admin
+    topFoto:            # klucz modułu
+      ...
+    gallery:
+      ...
+    galleryCollection:
+      ...
+                </pre>
+            </code>
+        </p>
+    </section>
+
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly-konfiguracja">
+        <h3>Moduły - koniguracja</h3>
+
+        <p class="fragment">konfigurację modułu definiuje klucz w pliku <em>config/dm/modules.yml</em></p>
+
+        <p class="fragment">plik jest podzielony na grupy i podgrupy</p>
+
+        <p class="fragment">
+        <pre class="fragment"><code>
+topFoto:                      # klucz modułu
+  model: TopGallery           # nazwa modelu (schema.yml)
+  name: TopGallery|TopGalleries # nazwa wyświetlana [opcjonalna]
+  page: false                 # czy rekordy reprezentowane są jako strony [true]
+  credentials: foto_top       # nazwa uprawnienia, które jest potrzebne do użycia
+  credentials: [[ c, c2 ]]    # gdy wiele warunek c lub c2
+  credentials: [[ c, c2 ], d] # gdy wiele warunek (c lub c2) ORAZ d
+  components: # lista widgetów. Ten klucz musibyć nawet jeśli lista jest pusta
+    carousel: # nazwa widgetu
+            ...
+        </code></pre>
+        </p>
+    </section>
+
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly-konfiguracja2">
+        <h3>Moduły - więcej konfiguracji</h3>
+        <pre class="fragment"><code>
+criterion:          # klucz modułu
+  parent: group     # klucz modułu nadrzędnego (opcj.)
+  model: Criterion  # nazwa modelu
+  name: Criterion|Criteria # nazwa wyświetlana l.poj|l.mn
+  admin: true       # jest w aplikacji admin [true]
+  front: true       # jest w apliakcji front [true]
+  page: true        # rekordy mają swoje własne strony [true]
+  components:
+    listByCategory: # nazwa modułu. Konwencja: list*, show* - specjalne
+      filters: [ group ] # filtry modułu list
+      cache: true   # czy można cache'ować dynamicznie (z parametrami) [true]
+    show:           # komponent pokazujący jeden rekord
+      cache: static # czy można cache'ować statycznie (jest nie zmienne)
+    showLittle:     # komponent pokazujący jeden rekord ale inaczej
+      cache: false  # bez cache
+      security:     # pozwala definiować precyzyjnie dostęp do poszczególnych akcji
+            ...
+        </code></pre>
+        <a href="https://web.archive.org/web/20120215033014/http://bugs.diem-project.org/projects/diem-project/wiki/Modules_definition">Pełna
+            konfiguracja w artykule Modules_definition na redmine projektu Diem [snapshot z archive.org - strona nie
+            istnieje]</a>
+    </section>
+
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly-konfiguracja-specyficzna">
+        <h3>Moduły - konfuguracja specyficzna dla Polibuda.info</h3>
+        <pre class="fragment"><code>
+module:
+  components:
+    foo:
+      form_class: FooForm    # Pozwala definiować formularz edycyjny
+                             # widgetubez wpisu w widget_types.yml
+      public_name: Super Foo # Nazwa wyświetlana widgeta
+        </code></pre>
+    </section>
+
+    <section data-background="#046BCA" id="z-czego-sklada-sie-diem-media">
+        <h2>Biblioteka Mediów</h2>
+    </section>
+
+    <section data-background="#046BCA" id="z-czego-sklada-sie-diem-media-modyfikacje">
+        <h2>Biblioteka Mediów - jak ją modyfikujemy</h2>
+        <h3>Obecne</h3>
+        <h3>Planowane/pomysły</h3>
+    </section>
+
+    <section data-background="#046BCA" id="z-czego-sklada-sie-diem-template-helpery">
+        <h2>Template Helpery</h2>
+        <!--TODO: php _* methods-->
+    </section>
+
+    <section id="z-czego-sklada-sie-diem-template-uzytkownicy">
+        <h2>Użytkownicy</h2>
+        <!--TODO: grupy, uprawnienia, security strategies-->
+    </section>
+
+
+
+</section>
