@@ -1,0 +1,105 @@
+<section>
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly">
+        <h3>Moduły</h3>
+
+        <p class="fragment">Moduł to wyizolowana część aplikacji</p>
+
+        <p class="fragment">zazwyczaj zajmuje się obsługą jakiegoś modelu nanych</p>
+
+        <p class="fragment">jest logicznie związany z <em>modelem danych</em> (<em>schema.yml</em>)
+        </p>
+
+        <p class="fragment">odpowiada mu jeden folder (np moduł w aplikacji admin):</p>
+        <pre class="fragment php"><code>
+    moduleName                   # nazwa modułu
+    └── actions                  # kontrolery
+        ├── actions.class.php    #   akcje - modyfikacja danyhc
+        └── components.class.php #   komponenty - przedstawienie danych
+    └── config                   # konfiguracja (kaskadowa i właściwa tylko dla modułu)
+        └── generator.yml        # plik specyficzny dla aplikacji admin. Definiouje formularze i listę
+    └── lib                      # klasy - "ciężka" logika. Nie zawsze moduły mają ją tu wyeksportoaną :(
+        └── someClassName.php
+    └── templates                # widoki. zazwyczaj tylko partiale
+        └── _partial_name.php
+        </code></pre>
+        <span class="fragment">w katalogu app/(front|admin)/modules</span>
+    </section>
+
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly-plik-modules-yml">
+        <h3>Moduły - plik modules.yml</h3>
+
+        <p class="fragment">konfigurację modułu definiuje klucz w pliku <em>config/dm/modules.yml</em></p>
+
+        <p class="fragment">plik jest podzielony na grupy i podgrupy</p>
+
+        <pre class="fragment php"><code>
+Content:                # grupa - pierwszy poziom menu w admin
+  Foto:                 # podgrupa - drugi poziom menu w admin
+    topFoto:            # klucz modułu
+      ...
+    gallery:
+      ...
+    galleryCollection:
+      ...
+        </code></pre>
+    </section>
+
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly-konfiguracja">
+        <h3>Moduły - koniguracja</h3>
+
+        <p class="fragment">konfigurację modułu definiuje klucz w pliku <em>config/dm/modules.yml</em></p>
+
+        <p class="fragment">plik jest podzielony na grupy i podgrupy</p>
+
+        <pre class="fragment php"><code>
+topFoto:                      # klucz modułu
+  model: TopGallery           # nazwa modelu (schema.yml)
+  name: TopGallery|TopGalleries # nazwa wyświetlana [opcjonalna]
+  page: false                 # czy rekordy reprezentowane są jako strony [true]
+  credentials: foto_top       # nazwa uprawnienia, które jest potrzebne do użycia
+  credentials: [[ c, c2 ]]    # gdy wiele warunek c lub c2
+  credentials: [[ c, c2 ], d] # gdy wiele warunek (c lub c2) ORAZ d
+  components: # lista widgetów. Ten klucz musibyć nawet jeśli lista jest pusta
+    carousel: # nazwa widgetu
+            ...
+        </code></pre>
+    </section>
+
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly-konfiguracja2">
+        <h3>Moduły - więcej konfiguracji</h3>
+        <pre class="fragment php"><code>
+criterion:          # klucz modułu
+  parent: group     # klucz modułu nadrzędnego (opcj.)
+  model: Criterion  # nazwa modelu
+  name: Criterion|Criteria # nazwa wyświetlana l.poj|l.mn
+  admin: true       # jest w aplikacji admin [true]
+  front: true       # jest w apliakcji front [true]
+  page: true        # rekordy mają swoje własne strony [true]
+  components:
+    listByCategory: # nazwa modułu. Konwencja: list*, show* - specjalne
+      filters: [ group ] # filtry modułu list
+      cache: true   # czy można cache'ować dynamicznie (z parametrami) [true]
+    show:           # komponent pokazujący jeden rekord
+      cache: static # czy można cache'ować statycznie (jest nie zmienne)
+    showLittle:     # komponent pokazujący jeden rekord ale inaczej
+      cache: false  # bez cache
+      security:     # pozwala definiować precyzyjnie dostęp do poszczególnych akcji
+            ...
+        </code></pre>
+        <a href="https://web.archive.org/web/20120215033014/http://bugs.diem-project.org/projects/diem-project/wiki/Modules_definition">Pełna
+                konfiguracja w artykule Modules_definition na redmine projektu Diem [snapshot z archive.org - strona nie
+                istnieje]</a>
+    </section>
+
+    <section data-background="#EEAA11" id="z-czego-sklada-sie-diem-moduly-konfiguracja-specyficzna">
+        <h3>Moduły - konfuguracja specyficzna dla Polibuda.info</h3>
+        <pre class="fragment php"><code>
+    module:
+      components:
+        foo:
+          form_class: FooForm    # Pozwala definiować formularz edycyjny
+                                 # widgetubez wpisu w widget_types.yml
+          public_name: Super Foo # Nazwa wyświetlana widgeta
+        </code></pre>
+    </section>
+</section>
