@@ -1,12 +1,129 @@
 <section>
-    <section data-background="#046BCA" id="z-czego-sklada-sie-diem-media">
+    <section data-background="#046BCA" id="biblioteka-mediow">
         <h2>Biblioteka Mediów</h2>
+
+        <p class="fragment">Pozwala na wielokrotne używanie obrazków, plików</p>
+
+        <p class="fragment">Składa się z 2 widoków: modułu i panelu
+            <img src="img/modul_media.png" alt="" style="width:70%;float:left;"/>
+            <img src="img/panel_media.png" alt="" style="width:23%;float:left;margin-left:5%"/>
+        </p>
+
+    </section>
+
+    <section data-background="#046BCA" id="biblioteka-mediow-dzialanie">
+        <h2>Jak działa biblioteka mediów?</h2>
+
+        <ul>
+            <li class="fragment">przechowuje w bazie strukturę katalogów</li>
+            <li class="fragment">pozwala umieszczać media w tekście</li>
+            <li class="fragment">umożliwia dodanie do plików metadanych</li>
+            <li class="fragment">bez problemu można podmienić źródło pliku</li>
+            <li class="fragment"><strong>generuje miniatury</strong>
+                (patrz: <a href="https://redmine.polibuda.info/projects/redakcja/wiki/Markdown#Obrazki">dokumentacja dla
+                    redaktorów</a>)
+            </li>
+        </ul>
+    </section>
+
+    <section data-background="#046BCA" id="biblioteka-mediow-modul">
+        <h2>Biblioteka mediaów - moduł</h2>
+
+        <ul>
+            <li class="fragment">pozwala nawigować po drzewie katalogów</li>
+            <li class="fragment">umożliwia zmianę metadanych, położenia i źródła pliku</li>
+            <li class="fragment">pozwala na upload do wybranego katalogu</li>
+            <li class="fragment">(na razie) nie pozwala na wyszukiwanie</li>
+        </ul>
+        <div class="fragment">
+
+            <p><strong>AHA!</strong> można robić moduły które nie korzystają z domyślnej listy!</p>
+            <figure class="fragment">
+                <img src="http://www.leading2learning.com/wp-content/uploads/2011/08/Boy-with-idea.jpg" alt=""
+                     style="height:200px"/>
+                <figcaption style="font-size:0.3em;color:rgba(255,255,255,0.4)">źródło:
+                    http://www.leading2learning.com/wp-content/uploads/2011/08/Boy-with-idea.jpg
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section data-background="#046BCA" id="biblioteka-mediow-panel">
+        <h2>Biblioteka mediaów - panel</h2>
+
+        <ul>
+            <li class="fragment">pozwala nawigować po drzewie katalogów
+                <ul>
+                    <li class="fragment">... w formie listy (bo to dodaliśmy, były mało użyteczne kafle)</li>
+                    <li class="fragment">... z widokiem okruchów (dodaliśmy)</li>
+                </ul>
+            </li>
+            <li class="fragment">pozwala na wyszukiwanie mediów i katalogów (dodaliśmy)</li>
+            <li class="fragment">pozwala na dodawanie katalogów (dodaliśmy)</li>
+            <li class="fragment"><strong>nie</strong> pozwala na zmianę metadanych, położenia i źródła pliku</li>
+            <li class="fragment">pozwala na upload do wybranego katalogu (dodaliśmy)</li>
+        </ul>
+        <div class="fragment">
+            <p><strong>AHA!</strong> można modyfikować nawet "core'owe" części Diema</p>
+            <figure class="fragment">
+                <img src="http://www.jet-engine.net/BR715%20(01).jpg" alt=""
+                     style="height:200px"/>
+                <figcaption style="font-size:0.3em;color:rgba(255,255,255,0.4)">źródło:
+                    http://www.jet-engine.net/BR715%20(01).jpg
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section data-background="#046BCA" id="z-czego-sklada-sie-diem-media-uzycie">
+        <h2>Media - jak ich używamy</h2>
+
+        <div class="fragment">
+
+
+            <p>drag & drop</p>
+
+            <img src="https://redmine.polibuda.info/attachments/download/998" style="width:45%;float:left;" alt=""/>
+            <img src="https://redmine.polibuda.info/attachments/download/999"
+                 style="width:45%;float:left;margin-left:8%" alt=""/>
+        </div>
+        <div class="fragment" style="clear:both;">
+        <p>&hellip; oraz</p>
+        <ul style="width:100%">
+            <li class="fragment">referencje w markdown:
+                <pre class="markdown"><code>![](media:3451 50x50)</code></pre>
+            </li>
+            <li class="fragment">referencje w widgetach</li>
+            <li class="fragment">referencje w kodzie
+                <pre class="php"><code>echo _media($entry->getThumbnail())->size('50x50')</code></pre>
+                (patrz: <a href="#/dla-kodera-template-helpery">template helpery</a>)
+            </li>
+        </ul>
+        </div>
     </section>
 
 
     <section data-background="#046BCA" id="z-czego-sklada-sie-diem-media-modyfikacje">
         <h2>Biblioteka Mediów - jak ją modyfikujemy</h2>
-        <h3>Obecne</h3>
-        <h3>Planowane/pomysły</h3>
+
+        <ul>
+            <li class="fragment">panel
+                <ul>
+                    <li class="fragment">wyszukiwanie po nazwach</li>
+                    <li class="fragment">wyszukiwanie katalogów</li>
+                    <li class="fragment">dodawanie plików i katalogów</li>
+                    <li class="fragment">okruchy (nawigacja)</li>
+                </ul>
+            </li>
+            <li class="fragment">moduł
+                <ul>
+                    <li class="fragment">wyszukiwanie referencji do nieistniejących plików (nasz plugin, jeszcze
+                        nieopublikowany)
+                    </li>
+                    <li class="fragment">multiupload (3rd party plugin)</li>
+                    <li class="fragment">[w planach] definiowanie dowolnych metadanych</li>
+                </ul>
+            </li>
+        </ul>
     </section>
 </section>

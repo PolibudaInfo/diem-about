@@ -1,4 +1,63 @@
-<section data-background="#046BCA" id="z-czego-sklada-sie-diem-template-helpery">
-    <h2>Template Helpery</h2>
-    <!--TODO: php _* methods-->
+<section>
+
+    <section data-background="#046BCA" id="dla-kodera">
+        <h2>Co dobrego dla kodera?</h2>
+    </section>
+
+    <section data-background="#046BCA" id="dla-kodera-template-helper-media">
+        <h2>Template Helper _media</h2>
+
+        <dl>
+            <dd class="fragment"><em>Q:</em> jak wyświetlić obrazek w HTML?</dd>
+            <dt class="fragment"><pre class="html"><code><img src="http://example.com/image.png" alt="jakiś tekst alternatywny" /></code></pre></dt>
+            <dd class="fragment"><em>Q:</em> jak to zrobić z użyciem PHP? (najgłupiej)</dd>
+            <dt class="fragment"><pre class="php"><code>$img = "http://example.com/image.png" // lub skomponowany jakkolwiek inaczej
+echo '<img src="' + $img + '" alt="jakiś tekst alternatywny" />';</code></pre></dt>
+            <dd class="fragment"><em>Q:</em> jak robi się to z użyciem symfony1?</dd>
+            <dt class="fragment"><pre class="php"><code>echo image_tag('image.png'); // da <img src="http://example.com/image.png" /> </code></pre>
+            <p>Co się stało? Otoczyliśmy string tagiem. Tu nie ma magii :(</p>
+            </dt>
+            <dd class="fragment"><em>Q:</em> a co jeśli mamy zasób z <a href="#/biblioteka-mediow">Biblioteki Mediów</a></dd>
+            <dt class="fragment"><pre class="php"><code>echo _media($imageObject);</code></pre>
+            <p>Co się stało? Zrobiliśmy tag na podstawie <strong>obiektu</strong> - tu siedzi magia ;)</p>
+            </dt>
+        </dl>
+    </section>
+
+    <section data-background="#046BCA" id="dla-kodera-template-helper-link">
+        <h2>Template Helper _link</h2>
+
+        <p class="fragment">Z linkowaniem do obiektów jest trochę ciężej</p>
+        <ul>
+            <li class="fragment">jak wyświetla się obiekt - czy mamy jak go wyświetlić? Szablon</li>
+            <li class="fragment">jaki jest jego adres?</li>
+            <li class="fragment">przetworzenie adresu: dodanie domeny</li>
+            <li class="fragment">wytworzenie tagu HTML</li>
+        </ul>
+        <p class="fragment">Dzięki Diem i <em>stronom</em> możemy w ciemno linkować do obiektów które mają strony</p>
+        <pre class="php fragment"><code>echo _ling($article); // dobrze się czyta ;) </code></pre>
+    </section>
+
+    <section data-background="#046BCA" id="dla-kodera-template-helper-mozliwosci">
+        <h2>Template Helpery - możliwości</h2>
+        <pre class="php fragment"><code>echo _media($article->image)
+->width(40)           // wygeneruje miniaturę o szerokości 40px
+// ->size(40,20)      // lub określimy wymiary ściśle
+->method('left')      // zachowując to co po lewej stronie obrazka,
+                      //ucinając tylko prawą jeśli trzeba
+->alt($article->prop) // ustawia attr alt
+->filter('greyscale') // nakłada filtr - tu: zmienia na skalę szarości
+->overlay(_media(), 'bottom-right') // nałoży inny obrazek w prawym dolnym rogu
+->quality(60);         // odda JPEG w jakości 60%</code></pre>
+    </section>
+
+    <section data-background="#046BCA" id="dla-kodera-template-helper-lista">
+        <h2>Template Helpery - lista</h2>
+        <ul>
+            <li>_media</li>
+            <li>_link</li>
+            <li>_table - pozwala generować tabele bez pisania ich tekstem</li>
+            <li>_tag - generuje dowolne tagi</li>
+        </ul>
+    </section>
 </section>
